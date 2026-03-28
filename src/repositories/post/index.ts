@@ -1,4 +1,4 @@
-import { JsonPostRepository } from "./json-post-repository";
+import { PrismaPostRepository } from "./prisma-post-repository";
 import { PostRepository } from "./post-repository";
 
-export const postRepository: PostRepository = new JsonPostRepository();
+export const postRepository: PostRepository = new PrismaPostRepository();
