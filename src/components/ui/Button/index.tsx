@@ -59,7 +59,7 @@ export function Button({
       className={clsx(
         "inline-flex items-center justify-center gap-2 rounded px-4 py-2 text-sm font-medium transition",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-1",
-        "disabled:cursor-not-allowed disabled:opacity-60",
+        "disabled:cursor-not-allowed disabled:opacity-60 cursor-pointer",
         iconOnly && "p-2",
         variantClasses[variant],
         colorClasses[color][variant],
