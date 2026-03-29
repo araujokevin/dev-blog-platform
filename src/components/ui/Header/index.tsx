@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { ArrowRightIcon } from "lucide-react";
-import Link from "next/link";
+import { UiLink } from "../UiLink";
 
 export function Header() {
   return (
@@ -19,35 +19,18 @@ export function Header() {
           "md:text-3xl/tight md:py-10",
         )}
       >
-        <Link href="/">The Dev Blog </Link>
+        <UiLink href="/" variant="default">
+          The Dev Blog{" "}
+        </UiLink>
       </h1>
 
       <div className="flex items-center gap-5">
-        <button
-          className={clsx(
-            "flex items-center gap-2",
-            "py-2 px-4",
-            "rounded",
-            "cursor-pointer",
-            "text-sm",
-            "text-gray-600",
-            "hover:bg-gray-100 transition",
-          )}
-        >
+        <UiLink href="#" variant="primary">
           Sign in <ArrowRightIcon width={16} height={16} />
-        </button>
-        <button
-          className={clsx(
-            "border border-gray-200 rounded",
-            "py-2 px-4",
-            "cursor-pointer",
-            "text-sm",
-            "text-gray-500",
-            "hover:bg-gray-100 transition",
-          )}
-        >
+        </UiLink>
+        <UiLink href="/register" variant="ghost">
           Sign up
-        </button>
+        </UiLink>
       </div>
     </header>
   );

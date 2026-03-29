@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import Link from "next/link";
+import { UiLink } from "../UiLink";
 
 export function Footer() {
   return (
@@ -17,9 +17,9 @@ export function Footer() {
         )}
       >
         <span> Copyright &copy; {new Date().getFullYear()}</span> |
-        <Link href="/" className="hover:underline">
+        <UiLink href="/" variant="default" className="hover:underline">
           The Dev Blog
-        </Link>
+        </UiLink>
       </p>
     </footer>
   );
