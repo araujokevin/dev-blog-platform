@@ -84,8 +84,27 @@ export class PrismaPostRepository implements PostRepository {
       },
     });
 
+    if (!post) throw new Error("Post não encontrado para ID");
+
+    return this.mapToPostModel(post);
+  }
+
+  async findPublicById(id: string): Promise<PostModel> {
+    const post = await prisma.post.findUnique({
+      where: {
+        id,
+      },
+      include: {
+        author: {
+          select: {
+            name: true,
+          },
+        },
+      },
+    });
+
     if (!post || !post.published)
-      throw new Error("Post não encontrado para ID");
+      throw new Error("Post público não encontrado para ID");
 
     return this.mapToPostModel(post);
   }
@@ -104,8 +123,27 @@ export class PrismaPostRepository implements PostRepository {
       },
     });
 
+    if (!post) throw new Error("Post não encontrado para slug");
+
+    return this.mapToPostModel(post);
+  }
+
+  async findPublicBySlug(slug: string): Promise<PostModel> {
+    const post = await prisma.post.findUnique({
+      where: {
+        slug,
+      },
+      include: {
+        author: {
+          select: {
+            name: true,
+          },
+        },
+      },
+    });
+
     if (!post || !post.published)
-      throw new Error("Post não encontrado para slug");
+      throw new Error("Post público não encontrado para slug");
 
     return this.mapToPostModel(post);
   }
