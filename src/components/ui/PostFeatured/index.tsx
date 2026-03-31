@@ -6,6 +6,11 @@ import { findAllPublicPostsCached } from "@/lib/post/queries";
 export async function PostFeatured() {
   const posts = await findAllPublicPostsCached();
   const post = posts[0];
+  const coverImageUrl = post?.coverImageUrl;
+
+  if (!post) {
+    return null;
+  }
 
   const postLink = `/post/${post.slug}`;
   return (
@@ -17,18 +22,20 @@ export async function PostFeatured() {
           " border border-gray-200/80 rounded-lg p-5 hover:bg-gray-100/90 transition",
         )}
       >
-        <PostCoverImage
-          linkProps={{
-            href: `${postLink}`,
-          }}
-          imageProps={{
-            width: 1200,
-            height: 720,
-            priority: true,
-            src: post.coverImageUrl,
-            alt: post.title,
-          }}
-        />
+        {coverImageUrl ? (
+          <PostCoverImage
+            linkProps={{
+              href: `${postLink}`,
+            }}
+            imageProps={{
+              width: 1200,
+              height: 720,
+              priority: true,
+              src: coverImageUrl,
+              alt: post.title,
+            }}
+          />
+        ) : null}
         <PostSummary
           title={post.title}
           excerpt={post.excerpt}
