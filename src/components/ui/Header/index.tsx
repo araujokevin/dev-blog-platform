@@ -14,7 +14,7 @@ export function Header() {
       <h1
         className={clsx(
           "text-green-700/80",
-          "text-xl/tight font-semibold py-8",
+          "text-base/tight font-semibold py-8",
           "sm:text-2xl/tight py-9",
           "md:text-3xl/tight md:py-10",
         )}
@@ -25,11 +25,8 @@ export function Header() {
       </h1>
 
       <div className="flex items-center gap-5">
-        <UiLink href="#" variant="primary">
-          Sign in <ArrowRightIcon width={16} height={16} />
-        </UiLink>
-        <UiLink href="/register" variant="ghost">
-          Sign up
+        <UiLink href="#" variant="primary" className="text-xs sm:text-sm">
+          Start now <ArrowRightIcon width={16} height={16} />
         </UiLink>
       </div>
     </header>
