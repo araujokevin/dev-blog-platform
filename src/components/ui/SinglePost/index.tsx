@@ -10,6 +10,7 @@ type SinglePostProps = {
 
 export async function SinglePost({ slug }: SinglePostProps) {
   const post = await findPostsBySlugCached(slug);
+  const coverImageUrl = post.coverImageUrl;
 
   return (
     <article className={clsx("mb-16 mt-8 overflow-hidden")}>
@@ -46,13 +47,15 @@ export async function SinglePost({ slug }: SinglePostProps) {
       </header>
 
       <figure className="border-y border-gray-200/80 bg-gray-100/50 mb-4">
-        <Image
-          src={post.coverImageUrl}
-          alt={post.title}
-          width={1200}
-          height={675}
-          className="h-auto w-full rounded-lg"
-        />
+        {coverImageUrl ? (
+          <Image
+            src={coverImageUrl}
+            alt={post.title}
+            width={1200}
+            height={675}
+            className="h-auto w-full rounded-lg"
+          />
+        ) : null}
       </figure>
 
       <section>

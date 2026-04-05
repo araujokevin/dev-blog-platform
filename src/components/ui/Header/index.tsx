@@ -25,7 +25,7 @@ export function Header() {
       </h1>
 
       <div className="flex items-center gap-5">
-        <UiLink href="#" variant="primary" className="text-xs sm:text-sm">
+        <UiLink href="/login" variant="primary" className="text-xs sm:text-sm">
           Start now <ArrowRightIcon width={16} height={16} />
         </UiLink>
       </div>

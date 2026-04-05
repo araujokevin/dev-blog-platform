@@ -17,6 +17,7 @@ export async function PostsList() {
     >
       {posts.slice(1).map((post) => {
         const postLink = `/post/${post.slug}`;
+        const coverImageUrl = post.coverImageUrl;
         return (
           <div
             className={clsx(
@@ -26,17 +27,19 @@ export async function PostsList() {
             )}
             key={post.id}
           >
-            <PostCoverImage
-              linkProps={{
-                href: `${postLink}`,
-              }}
-              imageProps={{
-                width: 1200,
-                height: 720,
-                src: post.coverImageUrl,
-                alt: post.title,
-              }}
-            />
+            {coverImageUrl ? (
+              <PostCoverImage
+                linkProps={{
+                  href: `${postLink}`,
+                }}
+                imageProps={{
+                  width: 1200,
+                  height: 720,
+                  src: coverImageUrl,
+                  alt: post.title,
+                }}
+              />
+            ) : null}
 
             <PostSummary
               createdAt={post.createdAt}
