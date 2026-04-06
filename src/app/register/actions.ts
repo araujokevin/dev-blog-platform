@@ -1,6 +1,5 @@
 "use server";
 
-import { prisma } from "@/lib/prisma";
 import { hashPassword } from "@/utils/hash-password";
 import { registerSchema } from "@/utils/register-schema";
 import { redirect } from "next/navigation";
@@ -10,6 +9,7 @@ import {
   getRegisterGlobalError,
   type RegisterActionState,
 } from "./get-register-feedback";
+import { userRepository } from "@/repositories/user";
 
 export async function registerAction(
   _prevState: RegisterActionState,
@@ -30,10 +30,7 @@ export async function registerAction(
   const { name, email, password } = parsedData.data;
 
   try {
-    const existingUser = await prisma.user.findUnique({
-      where: { email },
-      select: { id: true },
-    });
+    const existingUser = await userRepository.findCredentialsByEmail(email);
 
     if (existingUser) {
       return {
@@ -44,12 +41,10 @@ export async function registerAction(
 
     const passwordHash = await hashPassword(password);
 
-    await prisma.user.create({
-      data: {
-        name,
-        email,
-        passwordHash,
-      },
+    await userRepository.create({
+      name,
+      email,
+      passwordHash,
     });
   } catch {
     return {
